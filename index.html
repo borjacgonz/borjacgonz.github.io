@@ -36,8 +36,8 @@
       "credentials": "include"
     })
     .then(response => response.json())
-    .then(data => { 
-       today = data['PVPC'].map(x=> {
+    .then(body => { 
+       today = body['PVPC'].map(x=> {
            let price = parseFloat(x.EDCGASCYM.replace(",", "."))/1000;
            return {x: x.Hora, y: price}
        }); 
