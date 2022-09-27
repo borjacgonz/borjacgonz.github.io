@@ -8,17 +8,24 @@
   <h1>Precio €/kWh excedente gas hoy: <span id="day"></span></h1>
   <table>
     <tr>
-      <td>Media gas (€/kWh):</td><td id="gas"></td>
+      <td>Media gas hoy (€/kWh):</td><td id="gas"></td>
     </tr>
+  </table>
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+  
+<h1>Comparativa precio €/kWh PVPC vs fija 0.16€/kWh + compensación gas</h1>
+  <table>
     <tr>
-      <td>Media gas +0,16€/kWh:</td><td id="gas16"></td>
+      <td>Media trafia 0,16€/kWh + gas:</td><td id="gas16"></td>
     </tr>
     <tr>
       <td>Media PVPC (€/kWh):</td><td id="pvpc"></td>
     </tr>
   </table>
 <div>
-  <canvas id="myChart"></canvas>
+  <canvas id="myChart2"></canvas>
 </div>
 
 
@@ -67,7 +74,11 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
           parsing: {
               yAxisKey: 'gas'
           }
-        },{
+        }]
+      };
+
+  const data2 = {
+        datasets: [{
           data: x[1],
           label: "PVPC Hoy",
           backgroundColor: "#faefd1",
@@ -93,6 +104,16 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
       };
       const myChart = new Chart(
         document.getElementById('myChart'),
+        config
+      );
+
+      const config2 = {
+        type: 'line',
+        data: data2,
+        options: {}
+      };
+      const myChart2 = new Chart(
+        document.getElementById('myChart2'),
         config
       );
 });
