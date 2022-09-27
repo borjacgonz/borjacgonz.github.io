@@ -14,7 +14,38 @@
 <script>
 (function() {
     
-    fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=" + new Date().toJSON().slice(0,10), {
+    yesterday = getData(new Date().toJSON().slice(0,10));
+    today = getData(new Date().toJSON().slice(0,10));
+    tomorrow = getData(new Date().toJSON().slice(0,10));
+    
+Promise.all([yesterday, today, tomorrow]).then(function(x) {
+    const data = {
+        datasets: [{
+          data: x[0],
+          label: "Ayer"
+        },{
+          data: x[0],
+          label: "Hoy"
+        },{
+          data: x[0],
+          label: "Mañana"
+        }]
+      };
+
+      const config = {
+        type: 'line',
+        data: data,
+        options: {}
+      };
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+});
+})();
+
+function getData(day) {
+return fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=" + day, {
       "headers": {
         "accept": "application/json; application/vnd.esios-api-v2+json",
         "accept-language": "es,gl;q=0.9,en;q=0.8",
@@ -35,30 +66,12 @@
       "credentials": "include"
     })
     .then(response => response.json())
-    .then(body => { 
-       today = body['PVPC'].map(x=> {
+    .then(body => body['PVPC'].map(x=> {
            let price = parseFloat(x.EDCGASCYM.replace(",", "."))/1000;
            return {x: x.Hora, y: price}
        }); 
-
-      const data = {
-        datasets: [{
-          data: today,
-          label: "Hoy"
-        }]
-      };
-
-      const config = {
-        type: 'line',
-        data: data,
-        options: {}
-      };
-      const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-      );
-    })
-})();
+    );
+    }
    
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
