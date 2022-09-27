@@ -15,9 +15,9 @@
 (function() {
 
     todayDate = new Date()
-    tomorrowDate = new Date(today)
+    tomorrowDate = new Date(todayDate)
     tomorrowDate.setDate(tomorrow.getDate() + 1)
-    yestedayDate = new Date(today)
+    yestedayDate = new Date(todayDate)
     yestedayDate.setDate(tomorrow.getDate() - 1)
     
     yesterday = getData(yestedayDate.toJSON().slice(0,10));
