@@ -117,7 +117,7 @@ return fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=
       return body['PVPC'].map(x=> {
            let pvpc = parseFloat(x.PCB.replace(",", "."))/1000;
            let gas = parseFloat(x.EDCGASCYM.replace(",", "."))/1000;
-           let gas16 = gas + 0.016;
+           let gas16 = gas + 0.16;
            return {x: x.Hora, gas: gas, gas16: gas16, pvpc: pvpc}
        }) 
     });
