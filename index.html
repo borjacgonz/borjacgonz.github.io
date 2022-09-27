@@ -5,7 +5,7 @@
 </head>
 <body>
 
-  <h1>Precio kWh hoy: <span id="day"></span></h1>
+  <h1>Precio kWh excedente gas hoy: <span id="day"></span></h1>
 <div>
   <canvas id="myChart"></canvas>
 </div>
@@ -30,13 +30,16 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
     const data = {
         datasets: [{
           data: x[0],
-          label: "Ayer"
+          label: "Ayer",
+          color: "#ff6384"
         },{
           data: x[1],
-          label: "Hoy"
+          label: "Hoy",
+          color: "#36a2eb"
         },{
           data: x[2],
-          label: "Mañana"
+          label: "Mañana",
+          color: "#cc65fe"
         }]
       };
 
