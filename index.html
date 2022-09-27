@@ -5,8 +5,7 @@
 </head>
 <body>
 
-<h1>Today:</h1>
-<p id="today"></p>
+<h1>Precio kWh hoy:</h1
 <div>
   <canvas id="myChart"></canvas>
 </div>
@@ -41,11 +40,11 @@
            let price = parseFloat(x.EDCGASCYM.replace(",", "."))/1000;
            return {x: x.Hora, y: price}
        }); 
-       document.getElementById("today").innerHTML = today;
 
       const data = {
         datasets: [{
           data: today,
+          labels: ['hoy']
         }]
       };
 
