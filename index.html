@@ -16,9 +16,9 @@
 
     todayDate = new Date()
     tomorrowDate = new Date(todayDate)
-    tomorrowDate.setDate(tomorrow.getDate() + 1)
+    tomorrowDate.setDate(todayDate.getDate() + 1)
     yestedayDate = new Date(todayDate)
-    yestedayDate.setDate(tomorrow.getDate() - 1)
+    yestedayDate.setDate(todayDate.getDate() - 1)
     
     yesterday = getData(yestedayDate.toJSON().slice(0,10));
     today = getData(todayDate.toJSON().slice(0,10));
