@@ -81,16 +81,16 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
         datasets: [{
           data: x[1],
           label: "PVPC Hoy",
-          backgroundColor: "#faefd1",
-          borderColor: "#faefd1",
+          backgroundColor: "#f7d065",
+          borderColor: "#f7d065",
           parsing: {
               yAxisKey: 'pvpc'
           }
         },{
           data: x[1],
           label: "Fija 0,16€/kWh + gas",
-          backgroundColor: "#d1e6fa",
-          borderColor: "#d1e6fa",
+          backgroundColor: "#49aa7f",
+          borderColor: "#49aa7f",
           parsing: {
               yAxisKey: 'gas16'
           }
