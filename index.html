@@ -6,7 +6,7 @@
 <body>
 
   <h1>Precio €/kWh excedente gas hoy: <span id="day"></span></h1>
-  <div>Media gas: <span id="gas"></span>. Media gas +0,16€/kWh: <span id="gas16"></span>. Media PVPC: <span id="pvpc"></span>. </div>
+  <div>Media gas: <span id="gas"></span> €/kWh. Media gas +0,16€/kWh: <span id="gas16"></span> €/kWh. Media PVPC: <span id="pvpc"></span> €/kWh.</div>
 <div>
   <canvas id="myChart"></canvas>
 </div>
@@ -28,9 +28,9 @@
     tomorrow = getData(tomorrowDate.toJSON().slice(0,10));
     
 Promise.all([yesterday, today, tomorrow]).then(function(x) {
-  document.getElementById("gas").innerHTML = x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12;
-  document.getElementById("gas16").innerHTML = x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12;
-  document.getElementById("pvpc").innerHTML = x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12;
+  document.getElementById("gas").innerHTML = Math.round(x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12, 3);
+  document.getElementById("gas16").innerHTML = Math.round(x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12, 3);
+  document.getElementById("pvpc").innerHTML = Math.round(x[1].reduce((previousValue, currentValue) => previousValue + currentValue.pvpc, 0)/12, 3);
   
     const data = {
         datasets: [{
