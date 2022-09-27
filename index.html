@@ -6,6 +6,7 @@
 <body>
 
   <h1>Precio €/kWh excedente gas hoy: <span id="day"></span></h1>
+  <div>Media gas: <span id="gas"></span>. Media gas +0,16€/kWh: <span id="gas16"></span>. Media PVPC: <span id="pvpc"></span>. </div>
 <div>
   <canvas id="myChart"></canvas>
 </div>
@@ -27,22 +28,51 @@
     tomorrow = getData(tomorrowDate.toJSON().slice(0,10));
     
 Promise.all([yesterday, today, tomorrow]).then(function(x) {
+  document.getElementById("gas").innerHTML = x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12;
+  document.getElementById("gas16").innerHTML = x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12;
+  document.getElementById("pvpc").innerHTML = x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12;
+  
     const data = {
         datasets: [{
           data: x[0],
           label: "Ayer",
           backgroundColor: "#ff6384",
-          borderColor: "#ff6384"
+          borderColor: "#ff6384",
+          parsing: {
+              yAxisKey: 'gas'
+          }
         },{
           data: x[1],
           label: "Hoy",
           backgroundColor: "#36a2eb",
-          borderColor: "#36a2eb"
+          borderColor: "#36a2eb",
+          parsing: {
+              yAxisKey: 'gas'
+          }
         },{
           data: x[2],
           label: "Mañana",
           backgroundColor: "#cc65fe",
-          borderColor: "#cc65fe"
+          borderColor: "#cc65fe",
+          parsing: {
+              yAxisKey: 'gas'
+          }
+        },{
+          data: x[1],
+          label: "PVPC Hoy",
+          backgroundColor: "#faefd1",
+          borderColor: "#faefd1",
+          parsing: {
+              yAxisKey: 'pvpc'
+          }
+        },{
+          data: x[1],
+          label: "+0,16€/kWh",
+          backgroundColor: "#d1e6fa",
+          borderColor: "#d1e6fa",
+          parsing: {
+              yAxisKey: 'gas16'
+          }
         }]
       };
 
@@ -85,8 +115,10 @@ return fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=
         return null;
       }
       return body['PVPC'].map(x=> {
-           let price = parseFloat(x.EDCGASCYM.replace(",", "."))/1000;
-           return {x: x.Hora, y: price}
+           let pvpc = parseFloat(x.PCB.replace(",", "."))/1000;
+           let gas = parseFloat(x.EDCGASCYM.replace(",", "."))/1000;
+           let gas16 = gas + 0.016;
+           return {x: x.Hora, gas: gas, gas16: gas16, pvpc: pvpc}
        }) 
     });
     }
