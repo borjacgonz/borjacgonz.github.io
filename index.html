@@ -37,10 +37,10 @@
     })
     .then(response => response.json())
     .then(data => { 
-       today = (data['PVPC'].map(x=> {
-           let price (parseFloat(x.EDCGASCYM.replace(",", "."))/1000);
+       today = data['PVPC'].map(x=> {
+           let price = parseFloat(x.EDCGASCYM.replace(",", "."))/1000;
            return {x: x.Hora, y: price}
-       })); 
+       }); 
        document.getElementById("today").innerHTML = today;
 
       const data = {
