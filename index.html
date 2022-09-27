@@ -28,9 +28,9 @@
     tomorrow = getData(tomorrowDate.toJSON().slice(0,10));
     
 Promise.all([yesterday, today, tomorrow]).then(function(x) {
-  document.getElementById("gas").innerHTML = Math.round(x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12, 3);
-  document.getElementById("gas16").innerHTML = Math.round(x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12, 3);
-  document.getElementById("pvpc").innerHTML = Math.round(x[1].reduce((previousValue, currentValue) => previousValue + currentValue.pvpc, 0)/12, 3);
+  document.getElementById("gas").innerHTML = (x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12, 3).toFixed(3);
+  document.getElementById("gas16").innerHTML = (x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/12, 3).toFixed(3);
+  document.getElementById("pvpc").innerHTML = (x[1].reduce((previousValue, currentValue) => previousValue + currentValue.pvpc, 0)/12, 3).toFixed(3);
   
     const data = {
         datasets: [{
