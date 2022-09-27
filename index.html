@@ -7,6 +7,9 @@
 
 <h1>Today:</h1>
 <p id="today"></p>
+<div>
+  <canvas id="myChart"></canvas>
+</div>
 
 
 <script>
@@ -39,8 +42,27 @@
            return {x: x.Hora, y: price}
        })); 
        document.getElementById("today").innerHTML = today;
+
+      const data = {
+        labels: labels,
+        datasets: [{
+          data: today,
+        }]
+      };
+
+      const config = {
+        type: 'line',
+        data: data,
+        options: {}
+      };
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
     })
 })();
+   
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
