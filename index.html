@@ -13,10 +13,16 @@
 
 <script>
 (function() {
+
+    todayDate = new Date()
+    tomorrowDate = new Date(today)
+    tomorrowDate.setDate(tomorrow.getDate() + 1)
+    yestedayDate = new Date(today)
+    yestedayDate.setDate(tomorrow.getDate() - 1)
     
-    yesterday = getData(new Date().toJSON().slice(0,10));
-    today = getData(new Date().toJSON().slice(0,10));
-    tomorrow = getData(new Date().toJSON().slice(0,10));
+    yesterday = getData(yestedayDate.toJSON().slice(0,10));
+    today = getData(todayDate.toJSON().slice(0,10));
+    tomorrow = getData(tomorrowDate.toJSON().slice(0,10));
     
 Promise.all([yesterday, today, tomorrow]).then(function(x) {
     const data = {
