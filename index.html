@@ -69,7 +69,7 @@ return fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=
     .then(body => body['PVPC'].map(x=> {
            let price = parseFloat(x.EDCGASCYM.replace(",", "."))/1000;
            return {x: x.Hora, y: price}
-       }); 
+       }) 
     );
     }
    
