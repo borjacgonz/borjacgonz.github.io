@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>Precio kWh hoy:</h1
+  <h1>Precio kWh hoy: <span id="day"></span></h1>
 <div>
   <canvas id="myChart"></canvas>
 </div>
@@ -19,6 +19,8 @@
     tomorrowDate.setDate(todayDate.getDate() + 1)
     yestedayDate = new Date(todayDate)
     yestedayDate.setDate(todayDate.getDate() - 1)
+  
+  document.getElementById("day").innerHTML = todayDate;
     
     yesterday = getData(yestedayDate.toJSON().slice(0,10));
     today = getData(todayDate.toJSON().slice(0,10));
