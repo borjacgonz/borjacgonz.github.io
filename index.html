@@ -31,15 +31,18 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
         datasets: [{
           data: x[0],
           label: "Ayer",
-          color: "#ff6384"
+          backgroundColor: "#ff6384",
+          borderColor: "#ff6384"
         },{
           data: x[1],
           label: "Hoy",
-          color: "#36a2eb"
+          backgroundColor: "#36a2eb",
+          borderColor: "#36a2eb"
         },{
           data: x[2],
           label: "Mañana",
-          color: "#cc65fe"
+          backgroundColor: "#cc65fe",
+          borderColor: "#cc65fe"
         }]
       };
 
