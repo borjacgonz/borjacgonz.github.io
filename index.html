@@ -10,31 +10,46 @@
 
 
 <script>
-fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=" + new Date().toJSON().slice(0,10), {
-  "headers": {
-    "accept": "application/json; application/vnd.esios-api-v2+json",
-    "accept-language": "es,gl;q=0.9,en;q=0.8",
-    "authorization": "Token token=\"request_your_personal_token_sending_email_to_consultasios@ree.es\"",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-    "sec-ch-ua": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"macOS\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site"
-  },
-  "referrerPolicy": "no-referrer",
-  "body": null,
-  "method": "GET",
-  "mode": "cors",
-  "credentials": "include"
-})
-.then(response=>response.json())
-.then(data=>{ 
-   today = (data['PVPC'].map(x=>[x.Hora, (parseFloat(x.EDCGASCYM.replace(",", "."))/1000)+' €/kWh'])); 
-   document.getElementById("today").innerHTML(today);
-})
+  docReady(function() {
+    
+    fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=" + new Date().toJSON().slice(0,10), {
+      "headers": {
+        "accept": "application/json; application/vnd.esios-api-v2+json",
+        "accept-language": "es,gl;q=0.9,en;q=0.8",
+        "authorization": "Token token=\"request_your_personal_token_sending_email_to_consultasios@ree.es\"",
+        "cache-control": "no-cache",
+        "pragma": "no-cache",
+        "sec-ch-ua": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site"
+      },
+      "referrerPolicy": "no-referrer",
+      "body": null,
+      "method": "GET",
+      "mode": "cors",
+      "credentials": "include"
+    })
+    .then(response=>response.json())
+    .then(data=>{ 
+       today = (data['PVPC'].map(x=>[x.Hora, (parseFloat(x.EDCGASCYM.replace(",", "."))/1000)+' €/kWh'])); 
+       document.getElementById("today").innerHTML(today);
+    })
+    
+  })
+  
+  function docReady(fn) {
+    // see if DOM is already available
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        // call on next available tick
+        setTimeout(fn, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+  }
+}  
 <script>
 </body>
 </html>
