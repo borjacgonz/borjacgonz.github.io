@@ -90,7 +90,7 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
   const data2 = {
         datasets: [{
           data: x[1],
-          label: "PVPC Hoy",
+          label: "PVPC",
           backgroundColor: "#f7d065",
           borderColor: "#f7d065",
           parsing: {
@@ -98,7 +98,7 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
           }
         },{
           data: x[1],
-          label: "Fija 0,16€/kWh + gas",
+          label: "Fija + gas",
           backgroundColor: "#217898",
           borderColor: "#217898",
           parsing: {
