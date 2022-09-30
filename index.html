@@ -8,7 +8,13 @@
   <h1>Precio €/kWh excedente gas hoy: <span id="day"></span></h1>
   <table>
     <tr>
-      <td>Media gas hoy (€/kWh):</td><td id="gas"></td>
+      <td>Media gas ayer (€/kWh):</td><td id="gas-yesterday"></td>
+    </tr>
+    <tr>
+      <td>Media gas hoy (€/kWh):</td><td id="gas-today"></td>
+    </tr>
+    <tr>
+      <td>Media gas mañana (€/kWh):</td><td id="gas-tomorrow"></td>
     </tr>
   </table>
 <div>
@@ -47,7 +53,13 @@
 Promise.all([yesterday, today, tomorrow]).then(function(x) {
   let avgGas16 = (x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas16, 0)/24).toFixed(3);
   let avgPvpc  = (x[1].reduce((previousValue, currentValue) => previousValue + currentValue.pvpc, 0)/24).toFixed(3)
-  document.getElementById("gas").innerHTML = (x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/24).toFixed(3);
+  document.getElementById("gas-today").innerHTML = (x[1].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/24).toFixed(3);  
+  if (x[2] == null) {
+      document.getElementById("gas-tomorrow").innerHTML = '-';
+  } else {
+      document.getElementById("gas-tomorrow").innerHTML = (x[2].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/24).toFixed(3);
+  }
+  document.getElementById("gas-yesterday").innerHTML = (x[0].reduce((previousValue, currentValue) => previousValue + currentValue.gas, 0)/24).toFixed(3);
   document.getElementById("gas16").innerHTML = avgGas16;
   document.getElementById("pvpc").innerHTML = avgPvpc;
  
