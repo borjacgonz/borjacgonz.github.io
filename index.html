@@ -118,24 +118,6 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
           parsing: {
               yAxisKey: 'gas16'
           }
-        },{
-          data: x[2],
-          label: "PVPC Mañana",
-          borderDash: [5, 5],
-          backgroundColor: "#f9da85",
-          borderColor: "#f9da85",
-          parsing: {
-              yAxisKey: 'pvpc'
-          }
-        },{
-          data: x[2],
-          label: "Fija + gas Mañana",
-          borderDash: [5, 5],
-          backgroundColor: "#3d92b2",
-          borderColor: "#3d92b2",
-          parsing: {
-              yAxisKey: 'gas16'
-          }
         }]
       };
 
