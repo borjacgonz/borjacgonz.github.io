@@ -75,6 +75,7 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
         datasets: [{
           data: x[0],
           label: "Ayer",
+          borderDash: [5, 5],
           backgroundColor: "#eca9b7",
           borderColor: "#eca9b7",
           parsing: {
@@ -91,6 +92,7 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
         },{
           data: x[2],
           label: "Mañana",
+          borderDash: [5, 5],
           backgroundColor: "#cc65fe",
           borderColor: "#cc65fe",
           parsing: {
