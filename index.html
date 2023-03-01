@@ -144,26 +144,7 @@ Promise.all([yesterday, today, tomorrow]).then(function(x) {
 })();
 
 function getData(day) {
-return fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=" + day, {
-      "headers": {
-        "accept": "application/json; application/vnd.esios-api-v2+json",
-        "accept-language": "es,gl;q=0.9,en;q=0.8",
-        "authorization": "Token token=\"request_your_personal_token_sending_email_to_consultasios@ree.es\"",
-        "cache-control": "no-cache",
-        "pragma": "no-cache",
-        "sec-ch-ua": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\"",
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": "\"macOS\"",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site"
-      },
-      "referrerPolicy": "no-referrer",
-      "body": null,
-      "method": "GET",
-      "mode": "cors",
-      "credentials": "include"
-    })
+return fetch("https://api.esios.ree.es/archives/70/download_json?locale=es&date=" + day)
     .then(response => response.json())
     .then(body => {
       if (body['PVPC'] === undefined) {
